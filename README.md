@@ -1,7 +1,13 @@
 # Fetch Rewards Exercise
 
-### 1. Data is stored in 0.data
+### 1. Data Location
 
-### 2. Questions are answered from the next folder prefixing 1.,2.,3.
+- All relevant data can be found in the 0.data directory.
 
-### 3. In each folder please find the README.md file for important analysis and rationale behind modelling decisions
+### 2. Answered Questions
+
+- Responses to the exercise questions are organized in subsequent folders, each prefixed with 1., 2., 3., etc.
+
+### 3. Documentation and Analysis
+
+- Each folder contains a `README.md` file to document the rationale behind modeling decisions and provide important analysis. This ensures clarity and understanding of the design choices.
