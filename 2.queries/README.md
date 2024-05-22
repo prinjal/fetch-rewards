@@ -1,4 +1,4 @@
-# Answers ([Follow this instructions to execute the queries](#execute-the-queries-using-docker-compose))
+# Answers ([Please follow these instructions to execute the queries](#execute-the-queries-using-docker-compose))
 
 ## Q1. What are the top 5 brands by receipts scanned for most recent month?
 
