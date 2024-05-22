@@ -93,3 +93,15 @@ GROUP BY b.name
 ORDER BY transaction_count DESC
 LIMIT 1;
 ```
+
+# Execute the queries using docker-compose
+
+1. For the sake of simplicity, I have transformed the unstructred data to relational database.
+2. The docker-compose file will preload the data into postgresql database and will provide an interactive interface to execute the queries.
+3. I have already uploaded my docker image to docker hub and hence, the docker-compose file located in this directory can be downloaded and accessed using the below command:
+
+   ```shell
+   docker compose up --build
+   ```
+
+4. Once everything is up and running, navigate to [localhost:8082](http://localhost:8082/browser/) and execute the query as required
