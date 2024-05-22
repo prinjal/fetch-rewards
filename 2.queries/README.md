@@ -1,4 +1,4 @@
-# Answers
+# Answers ([Follow this instructions to execute the queries](#execute-the-queries-using-docker-compose))
 
 ## Q1. What are the top 5 brands by receipts scanned for most recent month?
 
@@ -94,14 +94,14 @@ ORDER BY transaction_count DESC
 LIMIT 1;
 ```
 
-# Execute the queries using docker-compose
+# Executing Queries Using Docker-Compose
 
-1. For the sake of simplicity, I have transformed the unstructred data to relational database.
-2. The docker-compose file will preload the data into postgresql database and will provide an interactive interface to execute the queries.
-3. I have already uploaded my docker image to docker hub and hence, the docker-compose file located in this directory can be downloaded and accessed using the below command:
+1. To streamline the process, I transformed the unstructured data into a relational database format.
+2. The provided docker-compose file preloads this data into a PostgreSQL database and offers an interactive interface for executing queries.
+3. I've uploaded the Docker image to Docker Hub. You can download and access the docker-compose file in this directory with the following command:
 
    ```shell
    docker compose up --build
    ```
 
-4. Once everything is up and running, navigate to [localhost:8082](http://localhost:8082/browser/) and execute the query as required
+4. Once the setup is complete, navigate to [localhost:8082](http://localhost:8082/) to execute the below queries as needed.
