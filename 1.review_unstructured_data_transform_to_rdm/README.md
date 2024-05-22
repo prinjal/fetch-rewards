@@ -1,6 +1,6 @@
 # Q1. Review Existing Unstructured Data and Diagram a New Structured Relational Data Model (Rationale for Data Modeling Decisions)
 
-# Please find the ER diagram in this directory named "Fetch Rewards.png"
+# Please find the ER diagram in this directory named ["Fetch Rewards.png"](https://github.com/prinjal/fetch-rewards/blob/main/1.review_unstructured_data_transform_to_rdm/Fetch%20Rewards.png)
 
 ## 1. **Reason for Keeping `points_payer_id` Separate:**
 
