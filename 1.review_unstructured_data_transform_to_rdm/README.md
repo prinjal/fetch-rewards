@@ -1,5 +1,7 @@
 # Q1. Review Existing Unstructured Data and Diagram a New Structured Relational Data Model (Rationale for Data Modeling Decisions)
 
+# Please find the ER diagram in this directory named "Fetch Rewards.png"
+
 ## 1. **Reason for Keeping `points_payer_id` Separate:**
 
 The `points_payer_id` field is intended to represent the entity responsible for awarding or paying points for a specific item on a receipt. This could be a user, a brand, a third-party partner, or another entity within the rewards or loyalty program.
