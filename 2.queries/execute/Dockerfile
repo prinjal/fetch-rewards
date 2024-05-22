@@ -11,6 +11,8 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install -r requirements.txt
 
+COPY ./data /data
+
 # Copy the rest of the application
 COPY . .
 

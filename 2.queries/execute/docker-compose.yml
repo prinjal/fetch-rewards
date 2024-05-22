@@ -42,8 +42,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
-    volumes:
-      - ../../0.data:/data
     entrypoint: ["sh", "-c", "sleep 20 && python load_data.py"]
 
 configs:
