@@ -1,4 +1,4 @@
-# Answers ([Please follow these instructions to execute the queries](#executing-queries-using-docker-compose))
+# Second: Write queries that directly answer predetermined questions from a business stakeholder ([Please follow these instructions to execute the queries](#executing-queries-using-docker-compose))
 
 ## Q1. What are the top 5 brands by receipts scanned for most recent month?
 
