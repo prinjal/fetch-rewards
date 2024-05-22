@@ -98,7 +98,7 @@ LIMIT 1;
 
 1. To streamline the process, I transformed the unstructured data into a relational database format.
 2. The provided docker-compose file preloads this data into a PostgreSQL database and offers an interactive interface for executing queries.
-3. I've uploaded the Docker image to Docker Hub. You can download and access the docker-compose file in this directory with the following command:
+3. I've uploaded the Docker image to Docker Hub. You can download docker-compose file from this directory and access the interface with the following command:
 
    ```shell
    docker compose up --build
