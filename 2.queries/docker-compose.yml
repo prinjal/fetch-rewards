@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   db:
@@ -32,17 +32,17 @@ services:
       - source: pgpass
         target: /pgpass
 
-  python:
-    image: prinjaldave0711/fetch-analytics:v1.0
-    # build: .
-    depends_on:
-      - db
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-    entrypoint: ["sh", "-c", "sleep 20 && python load_data.py"]
+  # python:
+  #   image: prinjaldave0711/fetch-analytics:v1.0
+  #   # build: .
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_HOST=db
+  #   entrypoint: ["sh", "-c", "sleep 20 && python load_data.py"]
 
 configs:
   pgpass:
