@@ -1,0 +1,235 @@
+version: 2
+
+models:
+  - name: users
+    description: "Transformed users table with primary keys and correct data types"
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: user_id
+        data_type: varchar(255)
+        description: "Primary key for the users table"
+        constraints:
+          - type: primary_key
+        tests:
+          - unique
+          - not_null
+      - name: active
+        data_type: boolean
+        description: "Indicates whether the user is active"
+      - name: created_date
+        data_type: timestamptz
+        description: "The date the user was created"
+      - name: last_login
+        data_type: timestamptz
+        description: "The date the user last logged in"
+      - name: role
+        data_type: varchar(255)
+        description: "Role of the user"
+      - name: state
+        data_type: varchar(255)
+        description: "State of the user"
+
+  - name: cpg
+    description: "Table containing unique CPG references extracted from raw brand data."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: cpg_id
+        data_type: varchar(255)
+        description: "The unique identifier for the CPG."
+        constraints:
+          - type: primary_key
+        tests:
+          - unique
+          - not_null
+      - name: cpg_ref
+        data_type: varchar(255)
+        description: "The reference type for the CPG."
+        tests:
+          - not_null
+
+  - name: brands
+    description: "Transformed brands table with primary keys and correct data types"
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: brand_id
+        data_type: varchar(255)
+        description: "Unique identifier for each brand."
+        constraints:
+          - type: primary_key
+        tests:
+          - unique
+          - not_null
+      - name: barcode
+        data_type: varchar(255)
+        description: "Barcode associated with the brand."
+      - name: category
+        data_type: varchar(255)
+        description: "Category of the brand."
+      - name: category_code
+        data_type: varchar(255)
+        description: "Category code of the brand."
+      - name: cpg_id
+        data_type: varchar(255)
+        description: "CPG identifier reference."
+        constraints:
+          - type: foreign_key
+            expression: "public_final.cpg(cpg_id)"
+        tests:
+          - not_null
+      - name: name
+        data_type: varchar(255)
+        description: "Name of the brand."
+      - name: top_brand
+        data_type: boolean
+        description: "Indicator if the brand is a top brand."
+
+  - name: receipts
+    description: "Transformed receipts table with primary keys and correct data types"
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: receipt_id
+        data_type: varchar(255)
+        description: "Primary key for the receipts table"
+        constraints:
+          - type: primary_key
+        tests:
+          - unique
+          - not_null
+      - name: bonus_points_earned
+        data_type: integer
+        description: "Bonus points earned from the receipt"
+      - name: bonus_points_earned_reason
+        data_type: varchar(255)
+        description: "Reason for bonus points earned"
+      - name: create_date
+        data_type: timestamptz
+        description: "Date the receipt was created"
+      - name: date_scanned
+        data_type: timestamptz
+        description: "Date the receipt was scanned"
+      - name: finished_date
+        data_type: timestamptz
+        description: "Date the receipt was finished"
+      - name: modify_date
+        data_type: timestamptz
+        description: "Date the receipt was modified"
+      - name: points_awarded_date
+        data_type: timestamptz
+        description: "Date points were awarded"
+      - name: points_earned
+        data_type: numeric(10,2)
+        description: "Points earned from the receipt"
+      - name: purchase_date
+        data_type: timestamptz
+        description: "Date of the purchase"
+      - name: purchased_item_count
+        data_type: integer
+        description: "Count of items purchased"
+      - name: rewards_receipt_status
+        data_type: varchar(255)
+        description: "Status of the receipt"
+      - name: total_spent
+        data_type: numeric(10,2)
+        description: "Total amount spent"
+      - name: user_id
+        data_type: varchar(255)
+        description: "User identifier reference"
+        constraints:
+          - type: foreign_key
+            expression: "public_final.users(user_id)"
+        tests:
+          - not_null
+
+  - name: receipt_items
+    description: "Transformed receipt items table with primary keys and correct data types"
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: receipt_item_id
+        data_type: uuid
+        description: "Primary key for the receipt items table"
+        constraints:
+          - type: primary_key
+        tests:
+          - unique
+          - not_null
+      - name: receipt_id
+        data_type: varchar(255)
+        description: "Receipt identifier reference"
+        constraints:
+          - type: foreign_key
+            expression: "public_final.receipts(receipt_id)"
+        tests:
+          - not_null
+      - name: barcode
+        data_type: varchar(255)
+        description: "Barcode of the item"
+      - name: description
+        data_type: varchar(255)
+        description: "Description of the item"
+      - name: final_price
+        data_type: numeric(10,2)
+        description: "Final price of the item"
+      - name: item_price
+        data_type: numeric(10,2)
+        description: "Original price of the item"
+      - name: needs_fetch_review
+        data_type: boolean
+        description: "Indicator if the item needs review"
+      - name: needs_fetch_review_reason
+        data_type: varchar(255)
+        description: "Reason the item needs review"
+      - name: original_receipt_item_text
+        data_type: text
+        description: "Original text of the receipt item"
+      - name: quantity_purchased
+        data_type: numeric(10,2)
+        description: "Quantity of items purchased"
+      - name: discounted_item_price
+        data_type: numeric(10,2)
+        description: "Discounted price of the item"
+      - name: price_after_coupon
+        data_type: numeric(10,2)
+        description: "Price of the item after applying coupon"
+      - name: prevent_target_gap_points
+        data_type: boolean
+        description: "Indicator to prevent target gap points"
+      - name: partner_item_id
+        data_type: varchar(255)
+        description: "Partner item identifier"
+      - name: points_earned
+        data_type: numeric(10,2)
+        description: "Points earned for the item"
+      - name: points_payer_id
+        data_type: varchar(255)
+        description: "Identifier of the points payer"
+      - name: rewards_group
+        data_type: varchar(255)
+        description: "Group of the rewards"
+      - name: rewards_product_partner_id
+        data_type: varchar(255)
+        description: "Product partner identifier for rewards"
+      - name: user_flagged_barcode
+        data_type: varchar(255)
+        description: "User flagged barcode of the item"
+      - name: user_flagged_description
+        data_type: varchar(255)
+        description: "User flagged description of the item"
+      - name: user_flagged_new_item
+        data_type: boolean
+        description: "Indicator if the user flagged it as a new item"
+      - name: user_flagged_price
+        data_type: numeric(10,2)
+        description: "User flagged price of the item"
+      - name: user_flagged_quantity
+        data_type: numeric(10,2)
+        description: "User flagged quantity of the item"
