@@ -32,17 +32,29 @@ services:
       - source: pgpass
         target: /pgpass
 
-  # python:
-  #   image: prinjaldave0711/fetch-analytics:v1.0
-  #   # build: .
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - POSTGRES_DB=postgres
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_HOST=db
-  #   entrypoint: ["sh", "-c", "sleep 20 && python load_data.py"]
+  python:
+    image: prinjaldave0711/fetch-analytics:v1.0
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    entrypoint: ["sh", "-c", "python load_elt.py"]
+
+  dbt:
+    image: fishtownanalytics/dbt:1.0.0
+    volumes:
+      - ./execute/dbt/fetch:/usr/app
+    environment:
+      DBT_PROFILES_DIR: /usr/app
+    depends_on:
+      python:
+        condition: service_completed_successfully
+    working_dir: /usr/app
+    entrypoint: ["sh", "-c", "dbt run"]
 
 configs:
   pgpass:

@@ -17,4 +17,4 @@ COPY ./data /data
 COPY . .
 
 # Set the entrypoint to the load_data.py script
-ENTRYPOINT ["python", "load_data.py"]
+ENTRYPOINT ["python", "load_elt.py"]

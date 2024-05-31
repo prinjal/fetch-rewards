@@ -6,7 +6,7 @@
 SELECT b.name, COUNT(ri.receipt_id) AS receipt_count
 FROM receipts r
 JOIN receipt_items ri ON r.receipt_id = ri.receipt_id
-JOIN brands b ON ri.brand_code= b.brand_code
+JOIN brands b ON ri.barcode= b.barcode
 WHERE r.purchase_date >= date_trunc('month', current_date) - interval '1 month'
   AND r.purchase_date < date_trunc('month', current_date)
 GROUP BY b.name
@@ -22,7 +22,7 @@ WITH recent_month AS (
   SELECT b.name, COUNT(ri.receipt_id) AS receipt_count
   FROM receipts r
   JOIN receipt_items ri ON r.receipt_id = ri.receipt_id
-  JOIN brands b ON ri.brand_code = b.brand_code
+  JOIN brands b ON ri.barcode = b.barcode
   WHERE r.purchase_date >= date_trunc('month', current_date) - interval '1 month'
     AND r.purchase_date < date_trunc('month', current_date)
   GROUP BY b.name
@@ -33,7 +33,7 @@ previous_month AS (
   SELECT b.name, COUNT(ri.receipt_id) AS receipt_count
   FROM receipts r
   JOIN receipt_items ri ON r.receipt_id = ri.receipt_id
-  JOIN brands b ON ri.brand_code = b.brand_code
+  JOIN brands b ON ri.barcode = b.barcode
   WHERE r.purchase_date >= date_trunc('month', current_date) - interval '2 month'
     AND r.purchase_date < date_trunc('month', current_date) - interval '1 month'
   GROUP BY b.name
@@ -52,7 +52,7 @@ ORDER BY recent_month_count DESC, previous_month_count DESC;
 ```sql
 SELECT rewards_receipt_status, AVG(total_spent) AS average_spend
 FROM receipts
-WHERE rewards_receipt_status IN ('Accepted', 'Rejected')
+WHERE rewards_receipt_status IN ('ACCEPTED', 'REJECTED')
 GROUP BY rewards_receipt_status;
 ```
 
@@ -62,7 +62,7 @@ GROUP BY rewards_receipt_status;
 SELECT r.rewards_receipt_status, SUM(ri.quantity_purchased) AS total_items
 FROM receipts r
 JOIN receipt_items ri ON r.receipt_id = ri.receipt_id
-WHERE r.rewards_receipt_status IN ('Accepted', 'Rejected')
+WHERE r.rewards_receipt_status IN ('ACCEPTED', 'REJECTED')
 GROUP BY r.rewards_receipt_status;
 ```
 
@@ -73,7 +73,7 @@ SELECT b.name, SUM(ri.final_price) AS total_spend
 FROM users u
 JOIN receipts r ON u.user_id = r.user_id
 JOIN receipt_items ri ON r.receipt_id = ri.receipt_id
-JOIN brands b ON ri.brand_code = b.brand_code
+JOIN brands b ON ri.barcode = b.barcode
 WHERE u.created_date >= current_date - interval '6 months'
 GROUP BY b.name
 ORDER BY total_spend DESC
@@ -87,7 +87,7 @@ SELECT b.name, COUNT(ri.receipt_item_id) AS transaction_count
 FROM users u
 JOIN receipts r ON u.user_id = r.user_id
 JOIN receipt_items ri ON r.receipt_id = ri.receipt_id
-JOIN brands b ON ri.brand_code = b.brand_code
+JOIN brands b ON ri.barcode = b.barcode
 WHERE u.created_date >= current_date - interval '6 months'
 GROUP BY b.name
 ORDER BY transaction_count DESC
